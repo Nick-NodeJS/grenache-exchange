@@ -22,7 +22,12 @@ class OrderMatchingEngine {
   }
 
   placeSellOrder({ price, quantity }) {
-    const order = { id: generateUniqueOrderId(), price, quantity, created_at: Date.now() };
+    const order = {
+      id: generateUniqueOrderId(),
+      price: parseFloat(price, 2),
+      quantity: parseFloat(quantity, 2),
+      created_at: Date.now()
+    };
     this.sellOrders.push(order);
     this.sellOrders.sort((a, b) => a.price !== b.price ? a.price - b.price : a.created_at - b.created_at);
     this.matchOrders();
